@@ -1,0 +1,70 @@
+<div class="container">
+    <h1>Consultar Cliente</h1>
+    <form [formGroup]="formulario" (ngSubmit)="findCliente(documentoBuscado)" class="form-row">        
+        <div class="form-group col">
+            <label for="numeroDeDocumento">Numero de documento</label>            
+            <input formControlName="numeroDeDocumento" id="numeroDeDocumento" class="form-control" placeholder="N° de documento" type="number"  
+            [required]="documentoBuscado.numeroDeDocumento" [(ngModel)]="documentoBuscado.numeroDeDocumento">
+            <span class="error" *ngIf="this.formulario.get('numeroDeDocumento')?.errors?.['required']">
+                * campo requerido
+            </span>
+            <span class="error" *ngIf="this.formulario.get('numeroDeDocumento')?.errors?.['pattern']">
+                el numero de documento debe tener entre 8 y 10 caracteres
+            </span>
+        </div>
+        <div class="form-group col">            
+            <label for="tipoDeDocumento">Tipo de documento</label>
+            <select formControlName="tipoDeDocumento" id="tipoDeDocumento" class="form-control"  [required]="documentoBuscado.tipoDeDocumento"
+            [(ngModel)]="documentoBuscado.tipoDeDocumento">
+                <option *ngFor="let doc of tiposDeDocumento"> {{doc}}</option>                            
+            </select>        
+        </div>        
+    </form>
+    <button class="btn btn-primary" (click)="findCliente(documentoBuscado)">Buscar</button>
+        
+    <div *ngIf="cliente.primerNombre!=''" class="cartCliente row">        
+            <div class="form-group col-5">
+                <label class="text-primary" for="primerNombre">1re Nombre</label>
+                <h4 id="primerNombre"> {{ cliente.primerNombre }} </h4>
+            </div>
+            <div class="form-group col-5">
+                <label class="text-primary" for="segundoNombre">2do Nombre</label>
+                <h4 id="segundoNombre"> {{ cliente.segundoNombre }} </h4>
+            </div>
+            <div class="form-group col-5">
+                <label class="text-primary" for="primerApellido">1re Apellido</label>
+                <h4 id="primerApellido"> {{ cliente.primerApellido }} </h4>
+            </div>
+            <div class="form-group col-5">
+                <label class="text-primary" for="segundoApellido">2do Apellido</label>
+                <h4 id="segundoApellido"> {{ cliente.segundoApellido }} </h4>
+            </div>     
+            <div class="form-group col-5">
+                <label class="text-primary" for="ciudad">Ciudad de Residencia</label>
+                <h4 id="ciudad"> {{ cliente.ciudadDeResidencia }} </h4>
+            </div>
+            <div class="form-group col-5">
+                <label class="text-primary" for="direccion">Direccion</label>
+                <h4 id="direccion"> {{ cliente.direccion }} </h4>
+            </div>
+            <div class="form-group col-5">
+                <label class="text-primary" for="tipoDocumento">Tipo de documento</label>
+                <h4 id="tipoDocumento"> {{ cliente.tipoDeDocumento }} </h4>
+            </div>
+            <div class="form-group col-5">
+                <label class="text-primary" for="numeroDeDocumento">Numero de documento</label>
+                <h4 id="numeroDeDocumento"> {{ cliente.numeroDeDocumento }} </h4>
+            </div>
+            <div class="form-group col-5">
+                <label class="text-primary" for="numeroDeTelefono">Numero de telefono</label>
+                <h4 id="numeroDeTelefono"> {{ cliente.telefono }} </h4>
+            </div>         
+    </div>
+    <div [class.collapse]="collapseMensajeClienteNoEncontrado">
+        <h1 class="text-danger">No se encontró ningun cliente con ese documento</h1>  
+    </div>
+    <div [class.collapse]="collapseMensajeClienteInvalido">
+        <h1 class="text-danger">El numero de documento ingresado es de un cliente invalido</h1>  
+    </div>                  
+            
+</div>

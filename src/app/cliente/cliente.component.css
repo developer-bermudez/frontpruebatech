@@ -1,0 +1,14 @@
+.cartCliente {
+    width: auto;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.cartCliente label {    
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
